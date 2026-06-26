@@ -22,7 +22,7 @@ Add the overlay to a flake:
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nub-overlay.url = "github:0xbigboss/nub-overlay";
+    nub-overlay.url = "github:alleneubank/nub-overlay";
     nub-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -45,9 +45,9 @@ Add the overlay to a flake:
 Run directly:
 
 ```sh
-nix run github:0xbigboss/nub-overlay# -- --version
-nix develop github:0xbigboss/nub-overlay
-nix build github:0xbigboss/nub-overlay#nub
+nix run github:alleneubank/nub-overlay# -- --version
+nix develop github:alleneubank/nub-overlay
+nix build github:alleneubank/nub-overlay#nub
 ```
 
 ## Outputs
