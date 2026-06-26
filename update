@@ -1,0 +1,119 @@
+#!/usr/bin/env nix-shell
+#! nix-shell -p curl jq -i bash
+set -euo pipefail
+
+release_type=${1:-latest}
+
+if [[ "$release_type" == "latest" ]]; then
+  releases_url="https://api.github.com/repos/nubjs/nub/releases/latest"
+elif [[ "$release_type" == v* ]]; then
+  releases_url="https://api.github.com/repos/nubjs/nub/releases/tags/$release_type"
+else
+  releases_url="https://api.github.com/repos/nubjs/nub/releases/tags/v$release_type"
+fi
+
+platforms=(
+  "x86_64-linux"
+  "aarch64-linux"
+  "x86_64-darwin"
+  "aarch64-darwin"
+)
+
+asset_name() {
+  case "$1" in
+  "x86_64-linux") echo "nub-linux-x64.tar.gz" ;;
+  "aarch64-linux") echo "nub-linux-arm64.tar.gz" ;;
+  "x86_64-darwin") echo "nub-darwin-x64.tar.gz" ;;
+  "aarch64-darwin") echo "nub-darwin-arm64.tar.gz" ;;
+  *) echo "unsupported platform: $1" >&2; exit 1 ;;
+  esac
+}
+
+prefetch_hash() {
+  local url=$1
+  nix store prefetch-file --hash-type sha256 --json "$url" | jq -r '.hash'
+}
+
+for cmd in curl jq nix; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "error: required command '$cmd' not found" >&2
+    exit 1
+  fi
+done
+
+echo "fetching nub release metadata: $release_type"
+release_info=$(curl -fsSL "$releases_url")
+tag=$(jq -r '.tag_name' <<<"$release_info")
+
+if [[ "$tag" == "null" || -z "$tag" ]]; then
+  echo "error: could not determine release tag from $releases_url" >&2
+  exit 1
+fi
+
+version=${tag#v}
+base_url="https://github.com/nubjs/nub/releases/download/$tag"
+tmp_json=$(mktemp)
+tmp_dir=$(mktemp -d)
+trap 'rm -f "$tmp_json"; rm -rf "$tmp_dir"' EXIT
+
+echo "processing nub $version ($tag)"
+
+for platform in "${platforms[@]}"; do
+  asset=$(asset_name "$platform")
+  url="$base_url/$asset"
+
+  echo "prefetching $platform: $asset"
+  hash=$(prefetch_hash "$url")
+
+  jq -n \
+    --arg url "$url" \
+    --arg sha256 "$hash" \
+    '{url: $url, sha256: $sha256}' >"$tmp_dir/$platform.json"
+done
+
+platforms_json=$(
+  jq -n \
+    --argjson x86_64_linux "$(cat "$tmp_dir/x86_64-linux.json")" \
+    --argjson aarch64_linux "$(cat "$tmp_dir/aarch64-linux.json")" \
+    --argjson x86_64_darwin "$(cat "$tmp_dir/x86_64-darwin.json")" \
+    --argjson aarch64_darwin "$(cat "$tmp_dir/aarch64-darwin.json")" \
+    '{
+      "x86_64-linux": $x86_64_linux,
+      "aarch64-linux": $aarch64_linux,
+      "x86_64-darwin": $x86_64_darwin,
+      "aarch64-darwin": $aarch64_darwin
+    }'
+)
+
+release_json=$(
+  jq -n \
+    --arg version "$version" \
+    --arg tag "$tag" \
+    --argjson platforms "$platforms_json" \
+    '{
+      version: $version,
+      tag: $tag,
+      platforms: $platforms
+    }'
+)
+
+if [[ "$release_type" == "latest" ]]; then
+  jq -n \
+    --arg version "$version" \
+    --argjson release "$release_json" \
+    '{"latest": $release, ($version): $release}' >"$tmp_json"
+else
+  jq -n \
+    --arg version "$version" \
+    --argjson release "$release_json" \
+    '{($version): $release}' >"$tmp_json"
+fi
+
+if [[ -f sources.json ]]; then
+  jq -S -s '.[0] * .[1]' sources.json "$tmp_json" >sources.json.new
+  mv sources.json.new sources.json
+else
+  mv "$tmp_json" sources.json
+fi
+
+echo "updated sources.json for nub $version"

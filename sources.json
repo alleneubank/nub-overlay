@@ -1,0 +1,46 @@
+{
+  "0.2.3": {
+    "platforms": {
+      "aarch64-darwin": {
+        "sha256": "sha256-tVDiXNEZ25XJ1W+xTOyXKVbh2DXOoVIoyGJc0TzXf5Q=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.2.3/nub-darwin-arm64.tar.gz"
+      },
+      "aarch64-linux": {
+        "sha256": "sha256-lEHMcwyw/fWswHYrKW+ZfyWQ4O0acco8qWqSo0p6hVI=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.2.3/nub-linux-arm64.tar.gz"
+      },
+      "x86_64-darwin": {
+        "sha256": "sha256-b4+lsazFqgR9FEfR6T0F1GrNQUbKMyokiSUttSk7MA0=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.2.3/nub-darwin-x64.tar.gz"
+      },
+      "x86_64-linux": {
+        "sha256": "sha256-QPUUjsQZiKI79tIu1mc6nAq2nAhOrtqiQaw2pZf4g9s=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.2.3/nub-linux-x64.tar.gz"
+      }
+    },
+    "tag": "v0.2.3",
+    "version": "0.2.3"
+  },
+  "latest": {
+    "platforms": {
+      "aarch64-darwin": {
+        "sha256": "sha256-tVDiXNEZ25XJ1W+xTOyXKVbh2DXOoVIoyGJc0TzXf5Q=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.2.3/nub-darwin-arm64.tar.gz"
+      },
+      "aarch64-linux": {
+        "sha256": "sha256-lEHMcwyw/fWswHYrKW+ZfyWQ4O0acco8qWqSo0p6hVI=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.2.3/nub-linux-arm64.tar.gz"
+      },
+      "x86_64-darwin": {
+        "sha256": "sha256-b4+lsazFqgR9FEfR6T0F1GrNQUbKMyokiSUttSk7MA0=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.2.3/nub-darwin-x64.tar.gz"
+      },
+      "x86_64-linux": {
+        "sha256": "sha256-QPUUjsQZiKI79tIu1mc6nAq2nAhOrtqiQaw2pZf4g9s=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.2.3/nub-linux-x64.tar.gz"
+      }
+    },
+    "tag": "v0.2.3",
+    "version": "0.2.3"
+  }
+}
