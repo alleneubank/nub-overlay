@@ -417,26 +417,48 @@
     "tag": "v0.7.2",
     "version": "0.7.2"
   },
+  "0.7.3": {
+    "platforms": {
+      "aarch64-darwin": {
+        "sha256": "sha256-wsuDbpGiqlZSKR8MyjpNwh2rmrkbj4cJjhNKPuxPf18=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.7.3/nub-darwin-arm64.tar.gz"
+      },
+      "aarch64-linux": {
+        "sha256": "sha256-XLwP+ioNqaqDgGi3/YuGFmz/+223l9n6C/7oTl4n0vo=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.7.3/nub-linux-arm64.tar.gz"
+      },
+      "x86_64-darwin": {
+        "sha256": "sha256-8goefWujboPXBcJanIpsYtjlCvJQX1OSgngWnTL6A2s=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.7.3/nub-darwin-x64.tar.gz"
+      },
+      "x86_64-linux": {
+        "sha256": "sha256-III2UDru7WZovelBhNWMRxT/c5+KVp4czICL7n0yUPU=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.7.3/nub-linux-x64.tar.gz"
+      }
+    },
+    "tag": "v0.7.3",
+    "version": "0.7.3"
+  },
   "latest": {
     "platforms": {
       "aarch64-darwin": {
-        "sha256": "sha256-PV87QAX1bL94M3uw53CIF7XJjeDiUoiX9iiZYIQVCDc=",
-        "url": "https://github.com/nubjs/nub/releases/download/v0.7.2/nub-darwin-arm64.tar.gz"
+        "sha256": "sha256-wsuDbpGiqlZSKR8MyjpNwh2rmrkbj4cJjhNKPuxPf18=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.7.3/nub-darwin-arm64.tar.gz"
       },
       "aarch64-linux": {
-        "sha256": "sha256-4VKX2w/MLbk7cBrqdV5ZoXgPPneiyi6O7mo6biVdMFg=",
-        "url": "https://github.com/nubjs/nub/releases/download/v0.7.2/nub-linux-arm64.tar.gz"
+        "sha256": "sha256-XLwP+ioNqaqDgGi3/YuGFmz/+223l9n6C/7oTl4n0vo=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.7.3/nub-linux-arm64.tar.gz"
       },
       "x86_64-darwin": {
-        "sha256": "sha256-fYB5PkthJcvdOgoa3t8lyoQoYlga+X8Tqng2RWAmW8I=",
-        "url": "https://github.com/nubjs/nub/releases/download/v0.7.2/nub-darwin-x64.tar.gz"
+        "sha256": "sha256-8goefWujboPXBcJanIpsYtjlCvJQX1OSgngWnTL6A2s=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.7.3/nub-darwin-x64.tar.gz"
       },
       "x86_64-linux": {
-        "sha256": "sha256-S+eRWkcHlCLOs4159DpvkBjlnqsIlXNq2OQtHASl8Vw=",
-        "url": "https://github.com/nubjs/nub/releases/download/v0.7.2/nub-linux-x64.tar.gz"
+        "sha256": "sha256-III2UDru7WZovelBhNWMRxT/c5+KVp4czICL7n0yUPU=",
+        "url": "https://github.com/nubjs/nub/releases/download/v0.7.3/nub-linux-x64.tar.gz"
       }
     },
-    "tag": "v0.7.2",
-    "version": "0.7.2"
+    "tag": "v0.7.3",
+    "version": "0.7.3"
   }
 }
