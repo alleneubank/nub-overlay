@@ -14,6 +14,16 @@ jobs:
       - run: ./update
         env:
           GH_TOKEN: ${{ github.token }}
+      # Pushes made with the default GITHUB_TOKEN do not trigger the Test
+      # workflow, so this job verifies the bumped sources itself. Without it a
+      # release whose tarball layout changed lands on main unbuilt.
+      - run: nix flake check
+      - run: nix run .# -- --version
+      - name: Test TypeScript runtime layout
+        run: |
+          tmpdir=$(mktemp -d)
+          printf 'const message: string = "ok"; console.log(message);\n' > "$tmpdir/check.ts"
+          test "$(nix run .# -- "$tmpdir/check.ts")" = "ok"
       - run: "git config user.email 0xbigboss@users.noreply.github.com"
       - run: "git config user.name nub-overlay"
       - run: "git add sources.json"

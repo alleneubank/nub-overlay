@@ -52,7 +52,7 @@
       mkdir -p "$out"
       cp -r bin "$out/bin"
       cp -r runtime "$out/runtime"
-      chmod +x "$out/bin/nub" "$out/bin/nubx"
+      chmod +x "$out"/bin/*
       runHook postInstall
     '';
 

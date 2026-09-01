@@ -33,9 +33,12 @@ On Linux, `nix flake check` also builds nub with `autoPatchelfHook` and verifies
 Keep the install layout aligned with nub's official release tarball:
 
 ```text
-$out/bin/nub
-$out/bin/nubx
+$out/bin/
 $out/runtime/
 ```
+
+The set of executables under `bin/` varies by release: tarballs up to 0.6.0 ship
+both `nub` and `nubx`, while 0.7.0 and later ship `nub` alone. `installPhase`
+therefore marks whatever `bin/` contains executable instead of naming files.
 
 Do not wrap or symlink the entrypoint. nub resolves its runtime from the real executable path, so wrapper-based packages can pass version checks while failing TypeScript execution.

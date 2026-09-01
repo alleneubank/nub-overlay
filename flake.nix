@@ -38,10 +38,6 @@
           drv = packages.nub;
           name = "nub";
         };
-        nubx = flake-utils.lib.mkApp {
-          drv = packages.nub;
-          name = "nubx";
-        };
         default = apps.nub;
       };
 
